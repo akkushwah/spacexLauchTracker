@@ -35,16 +35,14 @@ function App() {
 
   return (
     <>
-      <Header 
-        allLaunches={allLaunches} 
-        upcomingLaunches={upcomingLaunches} 
-        searchTerm={searchTerm} 
-        setSearchTerm={setSearchTerm} 
+      <Header
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       />
       <Hero />
-      <LaunchList 
-        upcomingLaunches={filteredUpcomingLaunches} 
-        pastLaunches={filteredPastLaunches} 
+      <LaunchList
+        upcomingLaunches={filteredUpcomingLaunches}
+        pastLaunches={filteredPastLaunches}
       />
       <Footer />
     </>
