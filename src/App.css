@@ -1,38 +1,257 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html,body{
+  height: 100%;
+  width: 100%;
+  overflow-x:hidden ;
+}
+body{
+  font-family: sans-serif;;
+  color:white;
+}
+a{
+  text-decoration: none;
+  color:white
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header{
+  padding-inline:2rem;
+  height: 10vh;
+  width:100vw;
+  background-color: #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color:white
+}
+.header .logo{
+  height:100%;
+  width: 150px;
+}
+.header img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.header ul{
+  display: flex;
+  align-items: center;
+  gap:15px
+}
+li{
+  list-style: none;
+  cursor: pointer;
+  transition: all 0.5s linear;
+}
+li a:hover{
+  color: #bebaba;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+.inputfield{
+  background-color: white;
+  border-radius:5px ;
+  border: 2px solid rgb(48, 48, 48);
+  color:rgb(59, 57, 57);
+  display: flex;
+  align-items: center;
+  padding-inline: 5px;
+}
+.inputfield .input{
+  border: none;
+  outline: none;
+  padding:5px;
+}
+
+.hero{
+  height: 40vh;
+  width: 100vw;
+  background-image: url('./assets/background.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  color:white;
+  position:relative;
+}
+.overlay{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.434);
+  z-index: 2;
+}
+.hero-container{
+  position: absolute;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.hero-container h3{
+  font-size:2rem;
+  font-weight: 500;
+}
+.hero-container h1{
+  font-size: 4.2rem;
+  font-weight: 500;
+  /* padding-block: 20px; */
+}
+.hero-container .hero-btn{
+  border:1px solid white;
+  display: flex;
+  width: 9.2rem;
+  align-items: center;
+  gap:10px;
+  padding:8px 12px;
+  font-size: 1rem;
+  margin-top: 20px;
+  background-color: white;
+  font-weight: 500;
+  color: black;
+  cursor: pointer;
+  animation: float 2s infinite linear
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes float {
+  0%{
+    scale: 1;
   }
-  to {
-    transform: rotate(360deg);
+  50%{
+    scale: 1.1;
+  }
+  100%{
+    scale: 1;
+  }
+}
+
+/****************** Upcoming Lauches ***********************/
+.launchlist{
+  height: 100%;
+  width: 100vw;
+  background-image: linear-gradient(to top, #4a3d27, #070707);
+  padding-block: 2.5rem;
+}
+
+.list-container>div{
+  padding-block:2rem;
+  margin-block:2rem;
+  overflow-x: hidden;
+  padding-inline: 2rem;
+}
+.list-container h1{
+  font-weight: 500;
+  font-size: 2.5rem;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.upcoming{
+  display: flex;
+  flex-direction:column ;
+}
+.container{
+  display: flex;
+  gap:20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.container .list {
+  height: auto;
+  width: 55%;
+  border-radius:2px ;
+  box-shadow: rgb(0, 0, 0) 0px 5px 15px;
+  display: flex ;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
+  padding:15px;
+  line-height: 28px;
+  letter-spacing:.8px;
+}
+.img-div{
+  width:8rem;
+  height: 8rem;
+  text-align: center;
+}
+
+img{
+  height: 100%;
+  width: 100%;
+}
+.list, .past-list {
+  & h2{
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-block: 7px;
+  }
+ & i{
+    color: #ffffffa5;
+    font-size: 14px;
+  }
+  & p {
+    font-size: 15px;
+  }
+}
+
+.past{
+  display: flex;
+  flex-direction:column ;
+  gap:1rem;  
+}
+.past-list{
+  margin:10px;
+  width: 15rem;
+  padding: 14px;
+  line-height: 25px;
+  box-shadow: rgb(0, 0, 0) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:10px;
+  letter-spacing: .6px;
+}
+
+
+
+
+/**************** Footer *******************/
+.footer{
+  height: 10vh;
+  width: 100vw;
+  background-color: black;
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-around;
+  align-items: center;
+}
+.footer .logo{
+  width:150px;
+}
+.footer .copyright{
+  font-size: 14px;
+  letter-spacing: .5px;
+}
+
+
+/********************** Media Queries ***********************/
+@media (max-width: 650px) {
+  .header{
+    height: auto;
+    flex-direction: column;
+    padding-bottom:12px;
+  }
+  .header ul{
+    gap:20px
   }
 }

@@ -1,24 +1,39 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route, useFetcher } from 'react-router-dom';
+import Header from './components/Header';
+import SearchBar from './components/SearchBar';
+import Footer from './components/Footer'
+import LaunchList from './components/LauchList'
 import './App.css';
+import Hero from './components/Hero';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [AllLaunches, setAllLaunches] = useState([])
+  const [upcomingLauches, setUpcomingLaunches] = useState([])
+  const [pastLaunches, setPastLaunches] = useState([])
+
+  useEffect(() => {
+    fetch('https://api.spacexdata.com/v3/launches').then(response => response.json()).then(data => { setAllLaunches(data) })
+
+    fetch('https://api.spacexdata.com/v3/launches/past').then(response => response.json()).then(data => setPastLaunches(data))
+
+    fetch('https://api.spacexdata.com/v3/launches/upcoming').then(response => response.json()).then(data => { setUpcomingLaunches(data) })
+
+  }, [])
+  console.log("Upcomimg launches", upcomingLauches)
+  console.log("past launches", pastLaunches)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+
+      <Header />
+      <Hero />
+      <LaunchList upcomingLauches={upcomingLauches} pastLaunches={pastLaunches} />
+      {/* <Route to="/" element={<div>Hello</div>} /> */}
+      <Footer />
+
+    </>
   );
 }
 
