@@ -1,38 +1,52 @@
-import { BrowserRouter as Router, Routes, Route, useFetcher } from 'react-router-dom';
 import Header from './components/Header';
-import SearchBar from './components/SearchBar';
-import Footer from './components/Footer'
-import LaunchList from './components/LauchList'
+import Footer from './components/Footer';
+import LaunchList from './components/LauchList';
 import './App.css';
 import Hero from './components/Hero';
 import { useEffect, useState } from 'react';
 
 function App() {
-
-  const [AllLaunches, setAllLaunches] = useState([])
-  const [upcomingLauches, setUpcomingLaunches] = useState([])
-  const [pastLaunches, setPastLaunches] = useState([])
+  const [allLaunches, setAllLaunches] = useState([]);
+  const [upcomingLaunches, setUpcomingLaunches] = useState([]);
+  const [pastLaunches, setPastLaunches] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetch('https://api.spacexdata.com/v3/launches').then(response => response.json()).then(data => { setAllLaunches(data) })
+    fetch('https://api.spacexdata.com/v3/launches')
+      .then(response => response.json())
+      .then(data => { setAllLaunches(data) });
 
-    fetch('https://api.spacexdata.com/v3/launches/past').then(response => response.json()).then(data => setPastLaunches(data))
+    fetch('https://api.spacexdata.com/v3/launches/past')
+      .then(response => response.json())
+      .then(data => setPastLaunches(data));
 
-    fetch('https://api.spacexdata.com/v3/launches/upcoming').then(response => response.json()).then(data => { setUpcomingLaunches(data) })
+    fetch('https://api.spacexdata.com/v3/launches/upcoming')
+      .then(response => response.json())
+      .then(data => { setUpcomingLaunches(data) });
+  }, []);
 
-  }, [])
-  console.log("Upcomimg launches", upcomingLauches)
-  console.log("past launches", pastLaunches)
+  const filteredUpcomingLaunches = upcomingLaunches.filter(launch =>
+    launch.mission_name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredPastLaunches = pastLaunches.filter(launch =>
+    launch.mission_name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
-
-      <Header />
+      <Header 
+        allLaunches={allLaunches} 
+        upcomingLaunches={upcomingLaunches} 
+        searchTerm={searchTerm} 
+        setSearchTerm={setSearchTerm} 
+      />
       <Hero />
-      <LaunchList upcomingLauches={upcomingLauches} pastLaunches={pastLaunches} />
-      {/* <Route to="/" element={<div>Hello</div>} /> */}
+      <LaunchList 
+        upcomingLaunches={filteredUpcomingLaunches} 
+        pastLaunches={filteredPastLaunches} 
+      />
       <Footer />
-
     </>
   );
 }
